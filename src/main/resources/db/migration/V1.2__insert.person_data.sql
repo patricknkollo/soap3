@@ -1,0 +1,10 @@
+INSERT INTO Person (nom ,prenom,age,ville)
+VALUES ('nkollo', 'patrick', 33, 'Essen');
+INSERT INTO Person (nom ,prenom,age,ville)
+VALUES ('nkollo', 'samuel', 13, 'Essen');
+INSERT INTO Person (nom ,prenom,age,ville)
+VALUES ('nkollo', 'Daniel', 11, 'Essen');
+INSERT INTO Person (nom ,prenom,age,ville)
+VALUES ('nkollo', 'Herve', 20, 'Essen');
+INSERT INTO Person (nom ,prenom,age,ville)
+VALUES ('nkollo', 'Harry', 21, 'Essen');

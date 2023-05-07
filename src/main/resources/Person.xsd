@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.soap.project1/gen17"
+           targetNamespace="http://com.soap.project1/gen17" elementFormDefault="qualified">
+
+    <xs:element name="getPersonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personid" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPersonRequestDAO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personid" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPersonByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nom" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllPersonsRequest">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="getAllPersonsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personsList" type="tns:Person" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPersonResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Person" type="tns:Person"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addPersonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nom" type="xs:string"/>
+                <xs:element name="prenom" type="xs:string"/>
+                <xs:element name="age" type="xs:int"/>
+                <xs:element name="ville" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addPersonResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string"/>
+            <xs:element name="prenom" type="xs:string"/>
+            <xs:element name="age" type="xs:int"/>
+            <xs:element name="ville" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updatePersonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personid" type="xs:int"/>
+                <xs:element name="nom" type="xs:string"/>
+                <xs:element name="prenom" type="xs:string"/>
+                <xs:element name="age" type="xs:int"/>
+                <xs:element name="ville" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updatePersonResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nom" type="xs:string"/>
+                <xs:element name="prenom" type="xs:string"/>
+                <xs:element name="age" type="xs:int"/>
+                <xs:element name="ville" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Person">
+        <xs:sequence>
+            <xs:element name="personid" type="xs:int"/>
+            <xs:element name="nom" type="xs:string"/>
+            <xs:element name="prenom" type="xs:string"/>
+            <xs:element name="age" type="xs:int"/>
+            <xs:element name="ville" type="xs:string"/>
+            <!--            <xs:element name="monnaie" type="tns:currency"/>-->
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!--    <xs:simpleType name="currency">
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="GBP"/>
+                <xs:enumeration value="EUR"/>
+                <xs:enumeration value="PLN"/>
+            </xs:restriction>
+        </xs:simpleType>-->
+</xs:schema>

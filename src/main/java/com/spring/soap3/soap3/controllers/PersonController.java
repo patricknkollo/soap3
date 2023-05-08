@@ -51,6 +51,14 @@ public class PersonController {
         return response;
     }
 
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deletePersonRequest")
+    @ResponsePayload
+    public DeletePersonResponse deletePersonById(@RequestPayload DeletePersonRequest request) {
+        DeletePersonResponse response = new DeletePersonResponse();
+        response.setPerson(personRepository.deletePersonDAO(request.getPersonid()));
+        return response;
+    }
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllPersonsRequest")
     @ResponsePayload
     public GetAllPersonsResponse getAllPersons(@RequestPayload GetAllPersonsRequest request) {

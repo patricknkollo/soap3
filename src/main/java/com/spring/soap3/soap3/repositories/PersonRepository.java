@@ -85,6 +85,21 @@ public class PersonRepository {
         return  persons;
     }
 
+    public Person deletePersonDAO (int personid){
+        Optional<PersonEntity>optionalPerson = personRepositoryDAO.findById(personid);
+        if(optionalPerson.isPresent()){
+            Person person = new Person();
+            Person newPerson = convertEntityToPerson(person, optionalPerson.get());
+            personRepositoryDAO.deleteById(personid);
+            logger.info("person with id {} deleted", personid);
+            return newPerson;
+        }
+        else {
+            logger.info("person with id {} doesn't exist", personid);
+            return null;
+        }
+    }
+
     private Person convertEntityToPerson(Person person, PersonEntity personEntity){
         person.setAge(personEntity.getAge());
         person.setVille(personEntity.getVille());

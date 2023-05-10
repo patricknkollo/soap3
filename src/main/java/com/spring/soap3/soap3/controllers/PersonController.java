@@ -1,7 +1,7 @@
 
 package com.spring.soap3.soap3.controllers;
 
-import com.spring.soap3.soap3.repositories.PersonRepository;
+import com.spring.soap3.soap3.repositories.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -16,11 +16,25 @@ public class PersonController {
 
     private static final String NAMESPACE_URI = "http://com.soap.project1/gen17";
 
-    private PersonRepository personRepository;
+    private PersonService personService;
 
     @Autowired
-    public PersonController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonController(PersonService personRepository) {
+        this.personService = personRepository;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "addPersonRequest")
+    @ResponsePayload
+    public AddPersonResponse postPerson(@RequestPayload AddPersonRequest request) {
+        AddPersonResponse response = new AddPersonResponse();
+        Person person = new Person();
+        person.setNom(request.getNom());
+        person.setPrenom(request.getPrenom());
+        person.setAge(request.getAge());
+        person.setVille(request.getVille());
+       response.setPerson(personService.postPersonDAO(person));
+
+        return response;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPersonRequest")
@@ -28,7 +42,7 @@ public class PersonController {
     public GetPersonResponse getPerson(@RequestPayload GetPersonRequest request) {
         GetPersonResponse response = new GetPersonResponse();
        // response.setPerson(personRepository.findPerson(request.getNom()));
-        response.setPerson(personRepository.findPerson(request.getPersonid()));
+        response.setPerson(personService.findPerson(request.getPersonid()));
 
         return response;
     }
@@ -38,7 +52,7 @@ public class PersonController {
     public GetPersonResponse getPersonDAO(@RequestPayload GetPersonRequestDAO request) {
         GetPersonResponse response = new GetPersonResponse();
         // response.setPerson(personRepository.findPerson(request.getNom()));
-        response.setPerson(personRepository.findPersonDAO(request.getPersonid()));
+        response.setPerson(personService.findPersonDAO(request.getPersonid()));
 
         return response;
     }
@@ -47,7 +61,7 @@ public class PersonController {
     @ResponsePayload
     public GetPersonResponse getPersonByname(@RequestPayload GetPersonByNameRequest request) {
         GetPersonResponse response = new GetPersonResponse();
-        response.setPerson(personRepository.findPersonByName(request.getNom()));
+        response.setPerson(personService.findPersonByName(request.getNom()));
         return response;
     }
 
@@ -55,7 +69,7 @@ public class PersonController {
     @ResponsePayload
     public DeletePersonResponse deletePersonById(@RequestPayload DeletePersonRequest request) {
         DeletePersonResponse response = new DeletePersonResponse();
-        response.setPerson(personRepository.deletePersonDAO(request.getPersonid()));
+        response.setPerson(personService.deletePersonDAO(request.getPersonid()));
         return response;
     }
 
@@ -63,7 +77,7 @@ public class PersonController {
     @ResponsePayload
     public GetAllPersonsResponse getAllPersons(@RequestPayload GetAllPersonsRequest request) {
         GetAllPersonsResponse response = new GetAllPersonsResponse();
-        List<Person> personList = personRepository.findAllPersonsDAO();
+        List<Person> personList = personService.findAllPersonsDAO();
         response.getPersonsList().addAll(personList);
        // response.set(personRepository.findPersonByName(request.));
         return response;

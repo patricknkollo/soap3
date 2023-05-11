@@ -37,6 +37,20 @@ public class PersonController {
         return response;
     }
 
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updatePersonRequest")
+    @ResponsePayload
+    public UpdatePersonResponse updatePerson(@RequestPayload UpdatePersonRequest request) {
+        UpdatePersonResponse response = new UpdatePersonResponse();
+        Person person = new Person();
+        person.setNom(request.getNom());
+        person.setPrenom(request.getPrenom());
+        person.setAge(request.getAge());
+        person.setVille(request.getVille());
+        response.setPerson(personService.postPersonDAO(person));
+
+        return response;
+    }
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPersonRequest")
     @ResponsePayload
     public GetPersonResponse getPerson(@RequestPayload GetPersonRequest request) {

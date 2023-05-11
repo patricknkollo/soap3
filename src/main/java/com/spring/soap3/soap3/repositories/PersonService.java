@@ -53,6 +53,22 @@ public class PersonService {
 
     public Person findPersonByName(String nom) {return persons.get(nom);}
 
+    public Person updatePersonDAO(int id, Person person) {
+        Optional<PersonEntity>optionalPersonEntity = personRepositoryDAO.findById(Integer.valueOf(id));
+        if(optionalPersonEntity.isPresent()){
+            logger.info("the person with id {} exist and his/her name is {}, {}!", id,optionalPersonEntity.get().getPrenom(),
+                    optionalPersonEntity.get().getNom());
+            PersonEntity personEntityToSave = convertPersonToEntity(optionalPersonEntity.get(), person);
+            PersonEntity personEntity = personRepositoryDAO.save(personEntityToSave);
+            Person personTemp = new Person();
+            return convertEntityToPerson(personTemp, personEntity);
+        }
+        else{
+            logger.info("the person with id {} doesn't exist", id);
+            return person;
+        }
+    }
+
     public Person postPersonDAO(Person person) {
         PersonEntity personEntity = new PersonEntity();
         PersonEntity newPersonEntity = convertPersonToEntity(personEntity, person);

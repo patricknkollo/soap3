@@ -81,10 +81,7 @@
     <xs:element name="updatePersonResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="nom" type="xs:string"/>
-                <xs:element name="prenom" type="xs:string"/>
-                <xs:element name="age" type="xs:int"/>
-                <xs:element name="ville" type="xs:string"/>
+                <xs:element name="Person" type="tns:Person"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
